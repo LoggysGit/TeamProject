@@ -1,46 +1,9 @@
 <template>
     <div class="home-page" :data-theme="theme">
         <BackgroundEffects />
+        
         <!-- Header -->
-        <header class="site-header">
-          <div class="header-inner">
-            <span class="logo">Header</span>
-  
-            <button
-              class="burger"
-              :class="{ 'is-open': menuOpen }"
-              type="button"
-              aria-label="Toggle navigation"
-              @click="menuOpen = !menuOpen"
-            >
-              <span></span><span></span><span></span>
-            </button>
-  
-            <nav class="nav-links" :class="{ 'is-open': menuOpen }">
-              <a href="/" class="nav-link">Home</a>
-              <a href="/about" class="nav-link">About</a>
-              <a href="/teamlist" class="nav-link">Teams</a>
-              <a href="/competitions" class="nav-link">Competitions</a>
-              <a href="/contacts" class="nav-link">Contact Us</a>
-  
-              <div class="user-block">
-                <span class="lang">ENG</span>
-                <button
-                  type="button"
-                  class="theme-toggle"
-                  :aria-pressed="theme === 'dark'"
-                  aria-label="Toggle dark theme"
-                  @click="toggleTheme"
-                >
-                  <svg class="icon icon-moon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M24 44C35.046 44 44 35.046 44 24C44 23.074 42.612 22.92 42.134 23.714C41.1145 25.4027 39.7241 26.8372 38.068 27.9089C36.412 28.9807 34.5338 29.6615 32.5757 29.8998C30.6175 30.1381 28.6309 29.9277 26.7661 29.2846C24.9013 28.6414 23.2074 27.5823 21.8126 26.1874C20.4177 24.7926 19.3586 23.0987 18.7154 21.2339C18.0723 19.3691 17.8619 17.3825 18.1002 15.4243C18.3385 13.4662 19.0193 11.588 20.0911 9.93197C21.1628 8.27594 22.5973 6.88551 24.286 5.866C25.08 5.386 24.926 4 24 4C12.954 4 4 12.954 4 24C4 35.046 12.954 44 24 44Z" fill="currentColor"/>
-                  </svg>
-                </button>
-                <span class="login">Login</span>
-              </div>
-            </nav>
-          </div>
-        </header>
+        <Header v-model:theme="theme" />
   
         <!-- Hero -->
         <section class="info-section">
@@ -147,26 +110,23 @@
 <script setup>
     import { ref } from 'vue'
     import BackgroundEffects from '../components/BackgroundEffects.vue'
+    import Header from '../components/Header.vue'
     import MovingList from '../components/MovingList.vue'
 
-    const menuOpen = ref(false)
     const theme = ref('light')
 
     const features = [
         {
           title: 'Feature 1',
-          description: 'Feature 1 desctiption. Lorem ipsum si dolore el lucina baline dur durum exmas li senra',
-          active: false,
+          description: 'Feature 1 desctiption. Lorem ipsum si dolore el lucina baline dur durum exmas li senra'
         },
         {
           title: 'Feature 2',
-          description: 'Feature 1 desctiption. Lorem ipsum si dolore el lucina baline dur durum exmas li senra',
-          active: true,
+          description: 'Feature 1 desctiption. Lorem ipsum si dolore el lucina baline dur durum exmas li senra'
         },
         {
           title: 'Feature 3',
-          description: 'Feature 1 desctiption. Lorem ipsum si dolore el lucina baline dur durum exmas li senra',
-          active: false,
+          description: 'Feature 1 desctiption. Lorem ipsum si dolore el lucina baline dur durum exmas li senra'
         },
     ]
     
@@ -189,7 +149,6 @@
           icon: '<path d="M86.9274 73.8176C84.2874 71.1757 81.2028 69.0193 77.8149 67.4473C82.5926 63.5766 85.6407 57.6703 85.6407 51.0469C85.6407 39.361 75.8953 29.7739 64.2094 29.9532C52.7028 30.1325 43.4321 39.5086 43.4321 51.0469C43.4321 57.6703 46.4906 63.5766 51.2578 67.4473C47.8692 69.0181 44.7844 71.1747 42.1453 73.8176C36.3867 79.5868 33.1172 87.2016 32.9063 95.3227C32.9035 95.4353 32.9232 95.5472 32.9643 95.6521C33.0055 95.7569 33.0672 95.8524 33.1458 95.933C33.2244 96.0136 33.3184 96.0776 33.4222 96.1213C33.526 96.1651 33.6374 96.1876 33.75 96.1875H39.6563C40.1098 96.1875 40.4895 95.8289 40.5 95.3754C40.7004 89.2582 43.1789 83.5313 47.5348 79.186C49.7638 76.9451 52.415 75.1687 55.3352 73.9593C58.2553 72.75 61.3863 72.1319 64.5469 72.1407C70.9699 72.1407 77.0133 74.6403 81.559 79.186C85.9043 83.5313 88.3828 89.2582 88.5938 95.3754C88.6043 95.8289 88.984 96.1875 89.4375 96.1875H95.3438C95.4564 96.1876 95.5678 96.1651 95.6716 96.1213C95.7754 96.0776 95.8693 96.0136 95.948 95.933C96.0266 95.8524 96.0883 95.7569 96.1295 95.6521C96.1706 95.5472 96.1903 95.4353 96.1875 95.3227C95.9766 87.2016 92.7071 79.5868 86.9274 73.8176ZM64.5469 64.5469C60.9399 64.5469 57.5438 63.1442 55.002 60.5918C53.7264 59.3263 52.7187 57.8167 52.0392 56.1533C51.3597 54.4898 51.0222 52.7065 51.0469 50.9098C51.0785 47.4504 52.4602 44.1071 54.8754 41.6286C57.4067 39.034 60.7922 37.5891 64.4098 37.5469C67.9852 37.5153 71.4551 38.9075 74.0074 41.4071C76.6231 43.97 78.0574 47.3977 78.0574 51.0469C78.0574 54.6539 76.6547 58.0395 74.1024 60.5918C72.8502 61.85 71.3609 62.8474 69.7207 63.5263C68.0805 64.2052 66.322 64.5521 64.5469 64.5469ZM38.127 53.8313C38.0321 52.9137 37.9793 51.9856 37.9793 51.0469C37.9793 49.37 38.1375 47.7352 38.4328 46.1426C38.5067 45.7629 38.3063 45.3727 37.9582 45.2145C36.5238 44.5711 35.2055 43.6852 34.0664 42.5672C32.7242 41.2658 31.668 39.6989 30.9653 37.9665C30.2625 36.2341 29.9286 34.3742 29.9848 32.5055C30.0797 29.12 31.4403 25.9032 33.8133 23.4774C36.4184 20.809 39.9199 19.3535 43.643 19.3957C47.0074 19.4274 50.2559 20.7246 52.7133 23.0239C53.5465 23.8043 54.2637 24.6692 54.8649 25.5973C55.0758 25.9243 55.4871 26.0614 55.8457 25.9348C57.702 25.2914 59.6637 24.8379 61.6781 24.627C62.2688 24.5637 62.6063 23.9309 62.3426 23.4035C58.9149 16.6219 51.9117 11.9391 43.8117 11.8125C32.1153 11.6332 22.3699 21.2203 22.3699 32.8957C22.3699 39.5192 25.418 45.4254 30.1957 49.2961C26.8418 50.8465 23.7516 52.9875 21.0727 55.6664C15.293 61.4356 12.0235 69.0504 11.8125 77.1821C11.8097 77.2946 11.8294 77.4066 11.8706 77.5114C11.9117 77.6162 11.9734 77.7118 12.0521 77.7924C12.1307 77.873 12.2247 77.937 12.3284 77.9807C12.4322 78.0244 12.5437 78.0469 12.6563 78.0469H18.5731C19.0266 78.0469 19.4063 77.6883 19.4168 77.2348C19.6172 71.1176 22.0957 65.3907 26.4516 61.0453C29.5524 57.9446 33.3492 55.793 37.4942 54.7489C37.9055 54.6434 38.1797 54.2532 38.127 53.8313Z" fill="currentColor"/>',
         },
     ]
-    
     const participantSteps = [
         {
           number: '01',
@@ -202,47 +161,6 @@
           icon: '<path d="M88.2 94.5L59.85 66.15C57.6 67.95 55.0125 69.375 52.0875 70.425C49.1625 71.475 46.05 72 42.75 72C34.575 72 27.657 69.168 21.996 63.504C16.335 57.84 13.503 50.922 13.5 42.75C13.497 34.578 16.329 27.66 21.996 21.996C27.663 16.332 34.581 13.5 42.75 13.5C50.919 13.5 57.8385 16.332 63.5085 21.996C69.1785 27.66 72.009 34.578 72 42.75C72 46.05 71.475 49.1625 70.425 52.0875C69.375 55.0125 67.95 57.6 66.15 59.85L94.5 88.2L88.2 94.5ZM42.75 63C48.375 63 53.157 61.032 57.096 57.096C61.035 53.16 63.003 48.378 63 42.75C62.997 37.122 61.029 32.3415 57.096 28.4085C53.163 24.4755 48.381 22.506 42.75 22.5C37.119 22.494 32.3385 24.4635 28.4085 28.4085C24.4785 32.3535 22.509 37.134 22.5 42.75C22.491 48.366 24.4605 53.148 28.4085 57.096C32.3565 61.044 37.137 63.012 42.75 63Z" fill="currentColor"/>',
         },
     ]
-
-    function toggleTheme(event) {
-        const x = event.clientX ?? window.innerWidth / 2;
-        const y = event.clientY ?? window.innerHeight / 2;
-
-        const endRadius = Math.hypot(
-          Math.max(x, window.innerWidth - x),
-          Math.max(y, window.innerHeight - y)
-        );
-
-        if (!document.startViewTransition) {
-          theme.value = theme.value === 'light' ? 'dark' : 'light';
-          return;
-        }
-    
-        document.documentElement.classList.add('vt-disable-transitions');
-    
-        const transition = document.startViewTransition(() => {
-          theme.value = theme.value === 'light' ? 'dark' : 'light';
-        });
-    
-        transition.ready.then(() => {
-          document.documentElement.animate(
-            {
-              clipPath: [
-                `circle(0px at ${x}px ${y}px)`,
-                `circle(${endRadius}px at ${x}px ${y}px)`,
-              ],
-            },
-            {
-              duration: 500,
-              easing: 'ease-in-out',
-              pseudoElement: '::view-transition-new(root)',
-            }
-          );
-        });
-
-        transition.finished.finally(() => {
-          document.documentElement.classList.remove('vt-disable-transitions');
-        });
-    }
 </script>
   
 <style>
@@ -262,24 +180,6 @@
 
     .vt-disable-transitions * {
       transition: none !important;
-    }
-
-    ::view-transition-group(root) {
-      animation-duration: 0s;
-    }
-
-    ::view-transition-old(root),
-    ::view-transition-new(root) {
-      animation: none !important;
-      mix-blend-mode: normal !important;
-    }
-
-    ::view-transition-old(root) {
-      z-index: 1;
-    }
-
-    ::view-transition-new(root) {
-      z-index: 2;
     }
 </style>
   
@@ -343,114 +243,6 @@
       transition-duration: 0.25s;
       transition-timing-function: ease;
     }
-  }
-
-  /* ---------- Header ---------- */
-  .site-header {
-    position: relative;
-    background: var(--color-header-bg);
-    box-shadow: var(--shadow-header);
-  }
-  
-  .header-inner {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    padding: 20px 5%;
-    max-width: 1440px;
-    margin: 0 auto;
-  }
-  
-  .logo {
-    flex-shrink: 0;
-    font-size: 28px;
-    font-weight: 800;
-    line-height: 1.1;
-    background: var(--gradient-brand);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    white-space: nowrap;
-  }
-  
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 44px;
-    flex-wrap: wrap;
-    margin-left: auto;
-  }
-  
-  .nav-link {
-    color: var(--color-accent);
-    font-size: 18px;
-    font-weight: 500;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  
-  .nav-link:hover,
-  .nav-link:focus-visible {
-    text-decoration: underline;
-  }
-  
-  .user-block {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .lang,
-  .login {
-    color: var(--color-accent);
-    font-size: 18px;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-  
-  .login {
-    font-weight: 600;
-  }
-  
-  .theme-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
-    color: var(--color-accent);
-  }
-  
-  .icon-moon {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .burger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    width: 32px;
-    height: 32px;
-    margin-left: auto;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    padding: 0;
-  }
-  
-  .burger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--color-accent);
-    border-radius: 2px;
-    transition: transform 0.2s ease, opacity 0.2s ease;
   }
   
   /* ---------- Shared section styles ---------- */
