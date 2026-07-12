@@ -41,9 +41,14 @@
   </template>
   
 <script setup>
-  import { ref } from 'vue'
+  import { ref, watch } from 'vue'
   
-  const theme = defineModel('theme', { default: 'light' }) 
+  const theme = ref(localStorage.getItem('theme') || 'light')
+
+  watch(theme, (value) => {
+    document.documentElement.setAttribute('data-theme', value)
+    localStorage.setItem('theme', value)
+  }, { immediate: true })
   
   const menuOpen = ref(false)
   
@@ -189,6 +194,41 @@
     background: var(--color-accent);
     border-radius: 2px;
     transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  @media (max-width: 768px) {
+    .page > section,
+    .page > .site-header,
+    .page > .site-footer {
+      margin-bottom: 60px;
+    }
+  
+    .page > .site-header {
+      margin-bottom: 20px;
+    }
+  
+    .burger {
+      display: flex;
+    }
+  
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
+      background: var(--color-header-bg);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+  
+    .nav-links.is-open {
+      display: flex;
+    }
   }
 </style>
   

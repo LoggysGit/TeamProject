@@ -1,5 +1,5 @@
 <template>
-    <div class="home-page" :data-theme="theme">
+    <div class="page">
         <BackgroundEffects />
         
         <!-- Header -->
@@ -109,8 +109,9 @@
   
 <script setup>
     import { ref } from 'vue'
-    import BackgroundEffects from '../components/BackgroundEffects.vue'
     import Header from '../components/Header.vue'
+
+    import BackgroundEffects from '../components/BackgroundEffects.vue'
     import MovingList from '../components/MovingList.vue'
 
     const theme = ref('light')
@@ -163,48 +164,8 @@
     ]
 </script>
   
-<style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100%;
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
-
-    .vt-disable-transitions * {
-      transition: none !important;
-    }
-</style>
-  
 <style scoped>
-  .home-page {
-    /* ---- Light theme ---- */
-    --color-bg: #dadada;
-    --color-panel: #f2f2f2;
-    --color-header-bg: #f1f1f1;
-    --color-surface: #ffffff;
-    --color-text: #1a1a1a;
-    --color-muted: #b5b5b5;
-    --color-faint: #adadad;
-    --color-icon: #8b8b8b;
-    --color-accent: #0800ff;
-    --color-accent-secondary: #423cfb;
-    --color-border: rgba(0, 9, 255, 0.2);
-    --gradient-brand: linear-gradient(138deg, #0101a5 18.63%, #0185ff 76.82%);
-    --shadow-panel: 3px 4px 15px 0 rgba(119, 119, 119, 0.25);
-    --shadow-header: 1px 4px 36px 4px rgba(135, 135, 135, 0.25);
-    --shadow-pill: 0 6px 10px 0 rgba(165, 165, 165, 0.25);
-    --shadow-feature-active: 7px 9px 10px 0 rgba(135, 135, 135, 0.25);
-  
-    --font-display: 'Montserrat', -apple-system, Roboto, Helvetica, sans-serif;
-  
+  .page {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -214,35 +175,6 @@
     color: var(--color-text);
     overflow-x: hidden;
     isolation: isolate;
-  }
-  
-  /* ---- Dark theme ---- */
-  .home-page[data-theme='dark'] {
-    --color-bg: #2a2a2a;
-    --color-panel: #343434;
-    --color-header-bg: #404040;
-    --color-surface: #1a1a1a;
-    --color-text: #eaeaea;
-    --color-muted: #b5b5b5;
-    --color-faint: #9e9e9e;
-    --color-icon: #8b8b8b;
-    --color-accent: #3c62fb;
-    --color-accent-secondary: #423cfb;
-    --color-border: rgba(72, 142, 255, 1);
-    --gradient-brand: linear-gradient(138deg, #0000cc 18.63%, #0185ff 76.82%);
-    --shadow-panel: 3px 4px 15px 0 rgba(0, 0, 0, 0.25);
-    --shadow-header: 1px 4px 36px 4px rgba(0, 0, 0, 0.25);
-    --shadow-pill: 0 6px 10px 0 rgba(0, 0, 0, 0.25);
-    --shadow-feature-active: 7px 9px 10px 0 rgba(0, 0, 0, 0.25);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .home-page,
-    .home-page * {
-      transition-property: background-color, color, border-color, box-shadow, opacity, transform;
-      transition-duration: 0.25s;
-      transition-timing-function: ease;
-    }
   }
   
   /* ---------- Shared section styles ---------- */
@@ -272,17 +204,17 @@
     line-height: 1.5;
   }
 
-  .home-page > section,
-  .home-page > .site-header,
-  .home-page > .site-footer {
+  .page > section,
+  .page > .site-header,
+  .page > .site-footer {
     margin-bottom: 100px;
   }
 
-  .home-page > .site-header {
+  .page > .site-header {
     margin-bottom: 28px;
   }
   
-  .home-page > :last-child {
+  .page > :last-child {
     margin-bottom: 0;
   }
   
@@ -539,52 +471,6 @@
   
     .section-lede {
       font-size: 16px;
-    }
-  
-    .moving-list {
-      gap: 32px;
-      padding: 14px 32px;
-    }
-  
-    .pill-item.dim {
-      font-size: 24px;
-    }
-  
-    .pill-item.main {
-      font-size: 36px;
-    }
-  
-    .home-page > section,
-    .home-page > .site-header,
-    .home-page > .site-footer {
-      margin-bottom: 60px;
-    }
-  
-    .home-page > .site-header {
-      margin-bottom: 20px;
-    }
-  
-    .burger {
-      display: flex;
-    }
-  
-    .nav-links {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 20px;
-      background: var(--color-header-bg);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      z-index: 10;
-    }
-  
-    .nav-links.is-open {
-      display: flex;
     }
   
     .features-grid {
