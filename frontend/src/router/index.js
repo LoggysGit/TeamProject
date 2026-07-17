@@ -4,7 +4,8 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import LoginView from '../views/AuthorizationView.vue'
 import ProfileView from '../views/ProfileView.vue'
-import TeamView from '../views/TeamlistView.vue'
+import TeamlistView from '../views/TeamlistView.vue'
+import CompetitionsView from '../views/CompetitionsView.vue'
 import ContactView from '../views/ContactsView.vue'
 
 const router = createRouter({
@@ -23,7 +24,12 @@ const router = createRouter({
     {
       path: '/teamlist',
       name: 'teamlist',
-      component: TeamView
+      component: TeamlistView
+    },
+    {
+      path: '/competitions',
+      name: 'competitions',
+      component: CompetitionsView
     },
     {
       path: '/login',

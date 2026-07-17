@@ -6,60 +6,60 @@
     <Header v-model:theme="theme" />
 
     <!-- Search -->
-<section class="search-section">
-  <div class="search-grid">
-    <div class="grid-cell">
-      <label class="field-label" for="team-search">Search</label>
-      <div class="field field-search">
-        <svg class="icon icon-search" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M50.6333 54.25L34.3583 37.975C33.0667 39.0083 31.5813 39.8264 29.9021 40.4292C28.2229 41.0319 26.4361 41.3333 24.5417 41.3333C19.8486 41.3333 15.8772 39.7076 12.6273 36.456C9.3775 33.2044 7.75172 29.233 7.75 24.5417C7.74828 19.8503 9.37406 15.8789 12.6273 12.6273C15.8806 9.37578 19.8521 7.75 24.5417 7.75C29.2313 7.75 33.2036 9.37578 36.4586 12.6273C39.7136 15.8789 41.3385 19.8503 41.3333 24.5417C41.3333 26.4361 41.0319 28.2229 40.4292 29.9021C39.8264 31.5812 39.0083 33.0667 37.975 34.3583L54.25 50.6333L50.6333 54.25ZM24.5417 36.1667C27.7708 36.1667 30.5161 35.0369 32.7773 32.7773C35.0386 30.5178 36.1684 27.7726 36.1667 24.5417C36.1649 21.3108 35.0352 18.5664 32.7773 16.3086C30.5195 14.0508 27.7743 12.9201 24.5417 12.9167C21.3091 12.9132 18.5647 14.0439 16.3086 16.3086C14.0525 18.5733 12.9218 21.3177 12.9167 24.5417C12.9115 27.7657 14.0421 30.5109 16.3086 32.7773C18.575 35.0438 21.3194 36.1736 24.5417 36.1667Z" fill="currentColor"/>
-        </svg>
-        <input
-          id="team-search"
-          v-model="query"
-          type="text"
-          class="field-input"
-          placeholder="Search for teams..."
-        />
+    <section class="search-section">
+      <div class="search-grid">
+        <div class="grid-cell">
+          <label class="field-label" for="team-search">Search</label>
+          <div class="field field-search">
+            <svg class="icon icon-search" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50.6333 54.25L34.3583 37.975C33.0667 39.0083 31.5813 39.8264 29.9021 40.4292C28.2229 41.0319 26.4361 41.3333 24.5417 41.3333C19.8486 41.3333 15.8772 39.7076 12.6273 36.456C9.3775 33.2044 7.75172 29.233 7.75 24.5417C7.74828 19.8503 9.37406 15.8789 12.6273 12.6273C15.8806 9.37578 19.8521 7.75 24.5417 7.75C29.2313 7.75 33.2036 9.37578 36.4586 12.6273C39.7136 15.8789 41.3385 19.8503 41.3333 24.5417C41.3333 26.4361 41.0319 28.2229 40.4292 29.9021C39.8264 31.5812 39.0083 33.0667 37.975 34.3583L54.25 50.6333L50.6333 54.25ZM24.5417 36.1667C27.7708 36.1667 30.5161 35.0369 32.7773 32.7773C35.0386 30.5178 36.1684 27.7726 36.1667 24.5417C36.1649 21.3108 35.0352 18.5664 32.7773 16.3086C30.5195 14.0508 27.7743 12.9201 24.5417 12.9167C21.3091 12.9132 18.5647 14.0439 16.3086 16.3086C14.0525 18.5733 12.9218 21.3177 12.9167 24.5417C12.9115 27.7657 14.0421 30.5109 16.3086 32.7773C18.575 35.0438 21.3194 36.1736 24.5417 36.1667Z" fill="currentColor"/>
+            </svg>
+            <input
+              id="team-search"
+              v-model="query"
+              type="text"
+              class="field-input"
+              placeholder="Search for teams..."
+            />
+          </div>
+        </div>
+      
+        <div class="grid-cell">
+          <span class="field-label">Deadline</span>
+          <div class="date-range">
+            <input v-model="deadlineFrom" type="date" class="field-input field-input--date" aria-label="From date" />
+            <span class="field-sep">–</span>
+            <input v-model="deadlineTo" type="date" class="field-input field-input--date" aria-label="To date" />
+          </div>
+        </div>
+      
+        <div class="grid-cell">
+          <span class="field-label">Tags</span>
+          <div class="chip-row">
+            <span
+              v-for="tag in selectedTags"
+              :key="tag.label"
+              class="chip"
+              :style="{ background: tag.color }"
+            >{{ tag.label }}</span>
+            <button type="button" class="chip chip-add" aria-label="Add tag">+</button>
+          </div>
+        </div>
+      
+        <div class="grid-cell">
+          <label class="field-label" for="team-type">Type</label>
+          <div class="field field-inline">
+            <input
+              id="team-type"
+              v-model="typeQuery"
+              type="text"
+              class="field-input"
+              placeholder="Startup, Biology..."
+            />
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="grid-cell">
-      <span class="field-label">Deadline</span>
-      <div class="date-range">
-        <input v-model="deadlineFrom" type="date" class="field-input field-input--date" aria-label="From date" />
-        <span class="field-sep">–</span>
-        <input v-model="deadlineTo" type="date" class="field-input field-input--date" aria-label="To date" />
-      </div>
-    </div>
-
-    <div class="grid-cell">
-      <span class="field-label">Tags</span>
-      <div class="chip-row">
-        <span
-          v-for="tag in selectedTags"
-          :key="tag.label"
-          class="chip"
-          :style="{ background: tag.color }"
-        >{{ tag.label }}</span>
-        <button type="button" class="chip chip-add" aria-label="Add tag">+</button>
-      </div>
-    </div>
-
-    <div class="grid-cell">
-      <label class="field-label" for="team-type">Type</label>
-      <div class="field field-inline">
-        <input
-          id="team-type"
-          v-model="typeQuery"
-          type="text"
-          class="field-input"
-          placeholder="Startup, Biology..."
-        />
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- Teams list -->
     <section class="teams-section">
@@ -104,49 +104,10 @@ const deadlineFrom = ref('')
 const deadlineTo = ref('')
 const typeQuery = ref('')
 
-const TAG_COLORS = {
-  Biology: '#8FC998',
-  Startup: '#EBA100',
-  SE: '#A2E6ED',
-  Other: '#8B8B8B',
-}
-
 const selectedTags = ref([
-  { label: 'Biology', color: TAG_COLORS.Biology },
 ])
 
 const teams = ref([
-  {
-    id: 1,
-    title: 'Team Title',
-    deadline: '00.00.2026 00:00',
-    tags: [
-      { label: 'Biology', color: TAG_COLORS.Biology },
-      { label: 'Startup', color: TAG_COLORS.Startup },
-      { label: 'SE', color: TAG_COLORS.SE },
-      { label: '...', color: TAG_COLORS.Other },
-    ],
-    description: 'Team description lorem pipi il vulinf ewfe wef wq fwefeff Team description lorem pipi il vulinf ewfe wef wq fwefeff Team description lorem pipi il vulinf ewfe wef wq fwefeff Team description lorem pipi il vulinf ewfe wef wq fwefeff Team description lorem pipi il vulinf ewfe wef wq fwefeff',
-  },
-  {
-    id: 2,
-    title: 'Neural Nomads',
-    deadline: '12.03.2026 18:00',
-    tags: [
-      { label: 'SE', color: TAG_COLORS.SE },
-      { label: 'Startup', color: TAG_COLORS.Startup },
-    ],
-    description: 'Building a lightweight recommendation engine for local businesses.',
-  },
-  {
-    id: 3,
-    title: 'BioSpark',
-    deadline: '20.03.2026 23:59',
-    tags: [
-      { label: 'Biology', color: TAG_COLORS.Biology },
-    ],
-    description: 'Researching low-cost biosensors for water quality monitoring.',
-  },
 ])
 
 const currentPage = ref(1)
@@ -158,6 +119,10 @@ const visiblePages = computed(() => {
   pages.push(totalPages)
   return pages
 })
+
+function sendSearchParams(){
+  
+}
 </script>
 
 <style scoped>

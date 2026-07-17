@@ -1,30 +1,46 @@
 <template>
-    <article class="team-card">
-      <div class="team-card-top">
+  <article class="team-card">
+    <div class="team-card-top">
+      <div class="team-heading">
         <h3 class="team-title">{{ team.title }}</h3>
-        <span class="team-deadline">Until {{ team.deadline }}</span>
-      </div>
-  
-      <div class="chip-row">
         <span
-          v-for="tag in team.tags"
-          :key="tag.label"
-          class="chip"
-          :style="{ background: tag.color }"
-        >{{ tag.label }}</span>
+          v-if="typeTag"
+          class="chip chip-type"
+          :style="{ background: typeTag.color }"
+        >{{ typeTag.label }}</span>
       </div>
-  
-      <p class="team-description">{{ team.description }}</p>
-    </article>
+      <span class="team-deadline">Until {{ team.deadline }}</span>
+    </div>
+
+    <div class="chip-row">
+      <span
+        v-for="tag in restTags"
+        :key="tag.label"
+        class="chip"
+        :style="{ background: tag.color }"
+      >{{ tag.label }}</span>
+    </div>
+
+    <p class="team-description">{{ team.description }}</p>
+  </article>
 </template>
-  
+
 <script setup>
-  defineProps({
-    team: {
-      type: Object,
-      required: true
-    }
-  })
+import { computed } from 'vue'
+
+const props = defineProps({
+  team: {
+    type: Object,
+    required: true,
+  },
+})
+
+const typeTag = computed(() => props.team.type ?? props.team.tags?.[0] ?? null)
+
+const restTags = computed(() => {
+  if (props.team.type) return props.team.tags ?? []
+  return (props.team.tags ?? []).slice(1)
+})
 </script>
 
 <style scoped>
@@ -43,10 +59,18 @@
 
 .team-card-top {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
+}
+
+.team-heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  min-width: 0;
 }
 
 .team-title {
@@ -61,6 +85,7 @@
   font-size: 15px;
   font-weight: 500;
   white-space: nowrap;
+  padding-top: 10px;
 }
 
 .team-description {
@@ -89,10 +114,29 @@
   white-space: nowrap;
 }
 
+.chip-type {
+  border-radius: 8px;
+  padding: 7px 20px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
 .chip-add {
   border: none;
   background: var(--color-icon);
   cursor: pointer;
   min-width: 36px;
+}
+
+@media (max-width: 480px) {
+  .team-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .team-deadline {
+    padding-top: 0;
+  }
 }
 </style>
